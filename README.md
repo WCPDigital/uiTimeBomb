@@ -1,7 +1,9 @@
 #uiTimeBomb jQuery &amp; Javascript Utility - A fast and flexible count-down timer.
 ================================
 
-**A simple, small, flexible JavaScript count-down &amp timer helper.**
+**A simple, small, flexible JavaScript count-down timer helper.**
+
+See a demo [here](https://www.wcpdigital.com.au/git/uitimebomb/example/)
 
 ##How to use uiTimeBomb
 ```html
