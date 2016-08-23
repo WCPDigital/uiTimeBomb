@@ -1,85 +1,57 @@
-#uiCooker Javascript Utility - A light-weight JavaScript Cookie util.
+#uiTimeBomb jQuery &amp; Javascript Utility - A fast and flexible count-down timer.
 ================================
 
-**A super simple, super small, bare-bones JavaScript Cookie helper.**
+**A simple, small, flexible JavaScript count-down &amp timer helper.**
 
-##How to use uiCooker
-
-```html
-<head>
-	...
-</head>
-<body>
-	...
-</body>
-<script src="uicooker.min.js"></script>
-<script>
-"use strict";
-var Cookies = new uiCooker();
-
-var enabled = Cookies.enabled();
-if( enabled ){
-	console.log("Cookies enabled.");
-	
-	var data = null;
-	if( Cookies.has("customData") ){
-		console.log("Cookie exists.");
-		
-		data = Cookies.get("customData");
-		console.log("Get cookie: " + data );
-		
-		data = Cookies.remove("customData");
-		console.log("Remove cookie: " + data );
-	}
-	
-	else{
-		data = Cookies.set("customData", 'some_custom_data')
-		console.log("Set cookie: " + data );
-	}
-}
-
-else{
-	console.log("Cookies disabled.");
-}
-</script>
-```
-
-##Or using jQuery uiCooker
+##How to use uiTimeBomb
 
 ```html
 <head>
 	...
 </head>
 <body>
-	...
+	<div>
+		<div id="timer"></div>
+		<div id="timer2"></div>
+		<div id="timer3"></div>
+	</div>
 </body>
-<script src="jquery.uicooker.min.js"></script>
+
+<script src="jquery.uitimebomb.min.js"></script>
 <script>
 "use strict";
-var enabled = $.uiCooker.enabled();
-if( enabled ){
-	console.log("Cookies enabled.");
+jQuery(function($){
+	$.uiTimeBomb({
+		date:new Date( Date.now()+(12E4) )
+		,localTime:false
+		,onStart:function(){
+			console.log("Start");
+		}
+		,onComplete:function(){
+			console.log("Complete");
+		}
+		,onUpdate:function(ui){
+			var data = ui.get("minutes");
+			var str = ui.supplant("{i}m, {s}s",data);
+			var el = document.getElementById("timer");
+			el.innerHTML = str;
+		}
+	});
 	
-	var data = null;
-	if( $.uiCooker.has("customData") ){
-		console.log("Cookie exists.");
-		
-		data = $.uiCooker.get("customData");
-		console.log("Get cookie: " + data );
-		
-		data = $.uiCooker.remove("customData");
-		console.log("Remove cookie: " + data );
-	}
+	$("#timer2").uiTimeBomb({
+		date:new Date( Date.now()+(36E5*2) )
+		,localTime:false
+		,method:"hours"
+		,format:"{h}h, {i}m, {s}s"
+	});
 	
-	else{
-		data = $.uiCooker.set("customData", 'some_custom_data')
-		console.log("Set cookie: " + data );
-	}
-}
-
-else{
-	console.log("Cookies disabled.");
-}
+	$("#timer3").uiTimeBomb({
+		date:new Date( Date.now()+(864E5*2) )
+		,localTime:false
+		,method:"days"
+		,format:"{d} Days {h} Hours {i} Mins {s} Secs"
+	});
+});
 </script>
 ```
 
