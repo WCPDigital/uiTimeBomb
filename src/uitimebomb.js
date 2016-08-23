@@ -42,17 +42,6 @@ function uiTimeBomb( args )
 		);
 	}
 
-	,setElement = function( el )
-	{
-		settings.element = el;
-		return self;
-	}
-	
-	,getElement = function()
-	{
-		return settings.element;
-	}
-	
 	,setDate = function( dt )
 	{
 		settings.date = dt;
