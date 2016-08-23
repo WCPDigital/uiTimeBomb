@@ -4,7 +4,6 @@
 **A simple, small, flexible JavaScript count-down &amp timer helper.**
 
 ##How to use uiTimeBomb
-
 ```html
 <head>
 	...
@@ -16,7 +15,52 @@
 		<div id="timer3"></div>
 	</div>
 </body>
+```
 
+```js
+<script src="uitimebomb.min.js"></script>
+<script>
+"use strict";
+var tb1 = new uiTimeBomb({
+	elements:[
+		document.getElementById("timer")
+	]
+	,date:new Date( Date.now()+(12E4) )
+	,localTime:false
+	,onStart:function(){
+		console.log("Start");
+	}
+	,onComplete:function(){
+		console.log("Complete");
+	}
+	,onUpdate:function(ui){
+		var data = ui.get("minutes");
+		var str = ui.supplant("{i}m, {s}s",data);
+		var el = document.getElementById("timer");
+		el.innerHTML = str;
+	}
+});
+
+var tb1 = new uiTimeBomb({
+	elements:document.getElementById("timer2")
+	,date:new Date( Date.now()+(36E5*2) )
+	,localTime:false
+	,method:"hours"
+	,format:"{h}h, {i}m, {s}s"
+});
+
+var tb1 = new uiTimeBomb({
+	elements:document.getElementById("timer3")
+	,date:new Date( Date.now()+(864E5*2) )
+	,localTime:false
+	,method:"days"
+	,format:"{d} Days {h} Hours {i} Mins {s} Secs"
+});
+</script>
+```
+
+##Or using jQuery uiTimeBomb
+```js
 <script src="jquery.uitimebomb.min.js"></script>
 <script>
 "use strict";
