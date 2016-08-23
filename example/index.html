@@ -46,21 +46,38 @@
 			</div>
 		</div>
 		<script>
+		"use strict";
+		jQuery(function($){
+		
+			$.uiTimeBomb({
+				date:new Date( Date.now()+(12E4) )
+				,localTime:false
+				,onStart:function(){
+					console.log("Start");
+				}
+				,onComplete:function(){
+					console.log("Complete");
+				}
+				,onUpdate:function(ui){
+					var data = ui.get("minutes");
+					var str = ui.supplant("{i}m, {s}s",data);
+					var el = document.getElementById("timer");
+					el.innerHTML = str;
+				}
+			});
+			$("#timer2").uiTimeBomb({
+				date:new Date( Date.now()+(36E5*2) )
+				,localTime:false
+				,method:"hours"
+				,format:"{h}h, {i}m, {s}s"
+			});
+			$("#timer3").uiTimeBomb({
+				date:new Date( Date.now()+(864E5*2) )
+				,localTime:false
+				,method:"days"
+				,format:"{d} Days {h} Hours {i} Mins {s} Secs"
+			});
 
-		var timer = $("#timer2,#timer3").uiTimeBomb({
-			date:new Date( Date.UTC(2016,07,23,23,18) )
-			,onStart:function(){
-				console.log("Start");
-			}
-			,onComplete:function(){
-				console.log("Complete");
-			}
-			,onUpdate:function(ui){
-				var data = ui.get("months");
-				var str = ui.supplant("{m}M, {d}D, {h}h, {i}m, {s}s",data);
-				var el = document.getElementById("timer");
-				el.innerHTML = str;
-			}
 		});
 		</script>
     </body>
